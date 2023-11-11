@@ -1,6 +1,6 @@
 namespace Localization.Domain.ValueObjects;
 
-public record State : ValueObject
+public sealed record State : ValueObject
 {
     const string RegexPattern = "^[a-zA-Z]+$";
 

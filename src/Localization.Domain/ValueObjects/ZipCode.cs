@@ -1,6 +1,6 @@
 namespace Localization.Domain.ValueObjects;
 
-public record ZipCode : ValueObject 
+public sealed record ZipCode : ValueObject 
 {
     const string RegexPattern = "^[0-9]*$";
 
