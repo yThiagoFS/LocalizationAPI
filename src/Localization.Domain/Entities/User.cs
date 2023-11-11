@@ -1,0 +1,1 @@
+namespace Localization.Domain.Entities;
