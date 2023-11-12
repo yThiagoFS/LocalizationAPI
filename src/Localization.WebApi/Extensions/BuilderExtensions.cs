@@ -1,0 +1,1 @@
+namespace Localization.WebApi.Extensions;

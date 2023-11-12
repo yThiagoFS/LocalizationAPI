@@ -4,9 +4,13 @@ namespace Localization.Domain.Entities;
 
 public sealed class Localization : Entity
 {
+    protected Localization() {}
+    
     public string AddedBy { get; }
 
     public DateTime CreatedAt { get; }
+
+    public DateTime UpdatedAt { get; }
 
     public IBGECode IBGECode { get; }
 

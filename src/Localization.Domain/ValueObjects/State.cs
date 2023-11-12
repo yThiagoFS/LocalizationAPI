@@ -10,7 +10,7 @@ public sealed record State : ValueObject
     {
         IsValid(acronym);
 
-        this.Acronym = acronym;
+        this.Acronym = acronym.ToUpper();
     }
 
     public static implicit operator string(State state) => state.Acronym;
@@ -21,10 +21,10 @@ public sealed record State : ValueObject
 
     private void IsValid(string acronym) 
     {
-        if(string.IsNullOrEmpty(acronym)) throw new Exception("State cannot be null or empty.");
+        ThrowIfNullOrEmpty(acronym, "State cannot be null or empty.");
 
-        if(acronym.Length != 2) throw new Exception("Invalid state, use just the acronym of the state.");
+        ThrowIfInvalidRegex(acronym, RegexPattern, "Only letters are avaliable for the state.");
 
-        if(!ValidateRegex(acronym, RegexPattern)) throw new Exception("Only letters are avaliable for the state.");
+        if(acronym.Length != 2) throw new Exception("Invalid state, use the acronym of the state.");
     }
 } 

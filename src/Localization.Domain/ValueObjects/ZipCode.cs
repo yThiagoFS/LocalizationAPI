@@ -10,7 +10,7 @@ public sealed record ZipCode : ValueObject
     {
         IsValid(code);
 
-        this.Code = code;
+        this.Code = code.Trim();
     }
 
     public static implicit operator string(ZipCode zipCode) => zipCode.Code;
@@ -19,9 +19,9 @@ public sealed record ZipCode : ValueObject
 
     private void IsValid(string code) 
     {
-        if(string.IsNullOrEmpty(code)) throw new Exception("Code cannot be null or empty.");
+        ThrowIfNullOrEmpty(code, "Code cannot be null or empty.");
 
-        if(!ValidateRegex(code, RegexPattern)) throw new Exception("Invalid regex, type only numbers.");
+        ThrowIfInvalidRegex(code, RegexPattern, "Invalid regex, type only numbers.");
 
         if(code.Length != 8) throw new Exception("Invalid zip code.");
     }
