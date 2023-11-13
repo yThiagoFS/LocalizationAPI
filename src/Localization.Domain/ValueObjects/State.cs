@@ -1,5 +1,3 @@
-using Localization.Domain.Common.Exceptions;
-
 namespace Localization.Domain.ValueObjects;
 
 public sealed record State : ValueObject

@@ -1,14 +1,12 @@
-using Localization.Domain.Common.Exceptions;
-
 namespace Localization.Domain.ValueObjects;
 
-public record class Email : ValueObject
+public sealed record Email : ValueObject
 {
     private const string Pattern = @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
 
     public Email(string address)
     {
-        IsValidEmail(address);
+        IsValid(address);
 
         Address = address.Trim().ToLower();
     }
@@ -21,13 +19,13 @@ public record class Email : ValueObject
 
     public override string ToString() => Address;
 
-    private void IsValidEmail(string address)
+    private void IsValid(string address)
     {
         ThrowIfNullOrEmpty(address, "E-mail cannot be null.");
 
         ThrowIfInvalidRegex(address, Pattern, "Invalid e-mail format.");
 
-        When(address.Length < 5, "E-mail cannot contain less than five characters.");
+        When(address.Length <= 6, "E-mail cannot contain less than five characters.");
     }
 
 }

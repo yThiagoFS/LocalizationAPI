@@ -19,7 +19,7 @@ public sealed record ZipCode : ValueObject
 
     private void IsValid(string code) 
     {
-        ThrowIfNullOrEmpty(code, "Code cannot be null or empty.");
+        ThrowIfNullOrEmpty(code, "Zip code cannot be null or empty.");
 
         ThrowIfInvalidRegex(code, RegexPattern, "Invalid zip code, type only numbers.");
 

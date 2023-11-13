@@ -1,8 +1,6 @@
-using Localization.Domain.Common.Exceptions;
-
 namespace Localization.Domain.ValueObjects;
 
-public record Password : ValueObject 
+public sealed record Password : ValueObject 
 {
     public string Value { get; private set; }
 

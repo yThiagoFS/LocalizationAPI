@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Localization.Domain.Common.Exceptions;
 using Localization.Domain.ValueObjects;
 using Localization.UnitTests.Utils;
 

@@ -1,6 +1,6 @@
 namespace Localization.Domain.ValueObjects;
 
-public record Name : ValueObject 
+public sealed record Name : ValueObject 
 {
     public string Value { get; }
 
