@@ -6,11 +6,11 @@ public sealed class User : Entity
 {
     protected User() {}
 
-    public Name Name { get; private set; } = new(string.Empty);
+    public Name Name { get; private set; }
 
-    public Email Email { get; private set; } = new(string.Empty);
+    public Email Email { get; private set; }
 
-    public Password Password { get; private set; } = new(string.Empty);
+    public Password Password { get; private set; }
 
     public DateTime CreatedAt { get; init; }
 
@@ -22,17 +22,17 @@ public sealed class User : Entity
         string name
         , string email
         , string password
-        , Role role)
+        , List<Role> roles)
     {
         this.Name = name;
         this.Email = email;
         this.Password = password;
         this.CreatedAt = DateTime.UtcNow;
-        this.Roles.Add(role);
+        this.Roles = roles;
     }
 
-    public static User Create(string name, string email, string password, Role role) 
-        => new(name, email, password, role);
+    public static User Create(string name, string email, string password, List<Role> roles) 
+        => new(name, email, password, roles);
 
     public User Update(string name, string email, string pasword, List<Role> roles) 
     {

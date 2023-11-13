@@ -3,7 +3,7 @@ using Localization.Domain.ValueObjects;
 
 namespace Localization.UnitTests.Domain.ValueObjects;
 
-public class ZipCodeTest : BaseValueObjectTest
+public class ZipCodeTest : BaseTest
 {
     [Theory]
     [InlineData("01156000")]

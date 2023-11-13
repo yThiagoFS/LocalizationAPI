@@ -3,7 +3,7 @@ using Localization.Domain.ValueObjects;
 
 namespace Localization.UnitTests.Domain.ValueObjects;
 
-public class StateTest : BaseValueObjectTest
+public class StateTest : BaseTest
 {
     [Theory]
     [InlineData("SP")]

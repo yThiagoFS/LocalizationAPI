@@ -8,7 +8,7 @@ public sealed class Role : Entity
 
     public Name Name { get; private set; }
 
-    public ICollection<User> Users { get; private set; }= new List<User>();
+    public ICollection<User> Users { get; private set; } = new List<User>();
 
     private Role(string name)   
         => this.Name = name;

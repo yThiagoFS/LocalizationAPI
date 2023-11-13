@@ -4,7 +4,7 @@ using Localization.UnitTests.Utils;
 
 namespace Localization.UnitTests.Domain.ValueObjects 
 {
-    public class NameTest : BaseValueObjectTest
+    public class NameTest : BaseTest
     {
         [Theory]
         [InlineData("Thiago")]

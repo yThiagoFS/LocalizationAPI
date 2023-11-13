@@ -6,34 +6,34 @@ public sealed class Localization : Entity
 {
     protected Localization() {}
 
-    public string AddedBy { get; private set; } = string.Empty;
+    public Name AddedBy { get; private set; } 
 
     public DateTime CreatedAt { get; private set; }
 
     public DateTime UpdatedAt { get; private set; }
 
-    public IBGECode IBGECode { get; private set; } = new(string.Empty);
+    public IBGECode IBGECode { get; private set; } 
 
-    public State State { get; private set; } = new(string.Empty);
+    public State State { get; private set; } 
 
-    public ZipCode ZipCode { get; private set; } = new(string.Empty);
+    public ZipCode ZipCode { get; private set; } 
 
     private Localization(
         string ibgeCode
         , string state
         , string zipCode
-        , string userFullName)
+        , string name)
     {
         this.IBGECode = ibgeCode;
         this.State = state;
         this.ZipCode = zipCode;
         this.CreatedAt = DateTime.UtcNow;
-        this.AddedBy = userFullName;
+        this.AddedBy = name;
     }
 
     public static Localization Create(string ibgeCode
         , string state
         , string zipCode
-        , string userFullName)
-        => new(ibgeCode, state, zipCode, userFullName);
+        , string name)
+        => new(ibgeCode, state, zipCode, name);
 }

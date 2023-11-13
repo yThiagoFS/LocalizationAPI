@@ -3,7 +3,7 @@ using Localization.Domain.ValueObjects;
 
 namespace Localization.UnitTests.Domain.ValueObjects;
 
-public class IBGECodeTest : BaseValueObjectTest
+public class IBGECodeTest : BaseTest
 {
     [Theory]
     [InlineData("01156000")]

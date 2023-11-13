@@ -3,7 +3,7 @@ using Localization.Domain.ValueObjects;
 
 namespace Localization.UnitTests.Domain.ValueObjects;
 
-public class EmailTest : BaseValueObjectTest
+public class EmailTest : BaseTest
 {
     [Theory]
     [InlineData("fakeadress@gmail.com")]
