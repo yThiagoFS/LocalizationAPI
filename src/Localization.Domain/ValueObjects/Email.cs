@@ -1,3 +1,5 @@
+using Localization.Domain.Common.Exceptions;
+
 namespace Localization.Domain.ValueObjects;
 
 public record class Email : ValueObject
@@ -11,7 +13,7 @@ public record class Email : ValueObject
         Address = address.Trim().ToLower();
     }
 
-    public string Address { get; set; }
+    public string Address { get; private set; }
 
     public static implicit operator string(Email email) => email.ToString();
 
@@ -19,13 +21,13 @@ public record class Email : ValueObject
 
     public override string ToString() => Address;
 
-    private static void IsValidEmail(string address)
+    private void IsValidEmail(string address)
     {
         ThrowIfNullOrEmpty(address, "E-mail cannot be null.");
 
-        if (address.Length < 5) throw new Exception("E-mail cannot contain less than five characters.");
-
         ThrowIfInvalidRegex(address, Pattern, "Invalid e-mail format.");
+
+        When(address.Length < 5, "E-mail cannot contain less than five characters.");
     }
 
 }

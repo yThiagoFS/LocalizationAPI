@@ -21,8 +21,8 @@ public sealed record ZipCode : ValueObject
     {
         ThrowIfNullOrEmpty(code, "Code cannot be null or empty.");
 
-        ThrowIfInvalidRegex(code, RegexPattern, "Invalid regex, type only numbers.");
+        ThrowIfInvalidRegex(code, RegexPattern, "Invalid zip code, type only numbers.");
 
-        if(code.Length != 8) throw new Exception("Invalid zip code.");
+        When(code.Length != 8, "Invalid zip code.");
     }
 }

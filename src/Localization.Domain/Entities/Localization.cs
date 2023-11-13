@@ -5,18 +5,18 @@ namespace Localization.Domain.Entities;
 public sealed class Localization : Entity
 {
     protected Localization() {}
-    
-    public string AddedBy { get; }
 
-    public DateTime CreatedAt { get; }
+    public string AddedBy { get; private set; } = string.Empty;
 
-    public DateTime UpdatedAt { get; }
+    public DateTime CreatedAt { get; private set; }
 
-    public IBGECode IBGECode { get; }
+    public DateTime UpdatedAt { get; private set; }
 
-    public State State { get; }
+    public IBGECode IBGECode { get; private set; } = new(string.Empty);
 
-    public ZipCode ZipCode { get; }
+    public State State { get; private set; } = new(string.Empty);
+
+    public ZipCode ZipCode { get; private set; } = new(string.Empty);
 
     private Localization(
         string ibgeCode

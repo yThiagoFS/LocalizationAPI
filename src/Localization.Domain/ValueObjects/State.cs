@@ -1,3 +1,5 @@
+using Localization.Domain.Common.Exceptions;
+
 namespace Localization.Domain.ValueObjects;
 
 public sealed record State : ValueObject
@@ -25,6 +27,6 @@ public sealed record State : ValueObject
 
         ThrowIfInvalidRegex(acronym, RegexPattern, "Only letters are avaliable for the state.");
 
-        if(acronym.Length != 2) throw new Exception("Invalid state, use the acronym of the state.");
+        When(acronym.Length != 2, "Invalid state, use the acronym of the state.");
     }
 } 

@@ -19,8 +19,8 @@ public record Name : ValueObject
     {
         ThrowIfNullOrEmpty(value, "Name cannot be null or empty.");
 
-        if(value.Length < 3) throw new Exception("Name is too short. Minimum 3 characters.");
+        When(value.Length < 3, "Name is too short. Minimum 3 characters.");
 
-        if(value.Length > 60) throw new Exception("Name is too large. Maximum 60 characters.");
+        When(value.Length > 60, "Name is too large. Maximum 60 characters.");
     }
 }
