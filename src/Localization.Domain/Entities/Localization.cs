@@ -10,7 +10,9 @@ public sealed class Localization : Entity
 
     public DateTime CreatedAt { get; private set; }
 
-    public DateTime UpdatedAt { get; private set; }
+    public Name? UpdatedBy { get; private set; }
+
+    public DateTime? UpdatedAt { get; private set; }
 
     public IBGECode IBGECode { get; private set; } 
 
@@ -29,6 +31,17 @@ public sealed class Localization : Entity
         this.ZipCode = zipCode;
         this.CreatedAt = DateTime.UtcNow;
         this.AddedBy = name;
+    }
+
+    public Localization Update(string updatedBy, string ibgeCode, string state, string zipCode)
+    {
+        this.UpdatedBy = updatedBy;
+        this.IBGECode = ibgeCode;
+        this.State = state;
+        this.ZipCode = zipCode;
+        this.UpdatedAt = DateTime.UtcNow;
+
+        return this;
     }
 
     public static Localization Create(string ibgeCode
