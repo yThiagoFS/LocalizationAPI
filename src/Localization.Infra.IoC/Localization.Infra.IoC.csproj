@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Localization.Infra.Data\Localization.Infra.Data.csproj" />
     <ProjectReference Include="..\Localization.Domain\Localization.Domain.csproj" />
+    <ProjectReference Include="..\Localization.Application\Localization.Application.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

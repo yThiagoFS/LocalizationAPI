@@ -10,6 +10,15 @@ public class RoleMap : IEntityTypeConfiguration<Role>
     {
         builder.HasKey(r => r.Id);
 
+        builder.Property(e => e.Name)
+        .HasConversion(
+            e => e.Value,
+            v => new Domain.ValueObjects.Name(v));
+
+        builder
+            .HasIndex(e => e.Name)
+            .IsUnique();
+
         builder
             .Property(r => r.Id)
             .IsRequired()

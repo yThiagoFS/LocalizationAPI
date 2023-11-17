@@ -1,3 +1,4 @@
+using Localization.Infra.Data.Mappings;
 using Microsoft.EntityFrameworkCore;
 
 namespace Localization.Infra.Data.Context;
@@ -14,6 +15,10 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder) 
     {
-        builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        builder.ApplyConfiguration(new UserMap());
+        builder.ApplyConfiguration(new LocalizationMap());
+        builder.ApplyConfiguration(new RoleMap());
+
+        base.OnModelCreating(builder);
     }
 }
