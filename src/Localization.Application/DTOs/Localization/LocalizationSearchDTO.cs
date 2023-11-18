@@ -24,7 +24,6 @@ public class LocalizationSearchDTO : LocalizationBaseDTO, IRequest<ResponseDTO<I
             }!;
         }
 
-
         var validator = new LocalizationSearchValidator(this).Validate(this);
 
         return validator.Errors;

@@ -4,9 +4,7 @@ public class LocalizationSearchValidator : LocalizationBaseValidator
 {
 
     public LocalizationSearchValidator(LocalizationSearchDTO dto) 
-    {
-        ValidateFields(dto);
-    }
+        => ValidateFields(dto);
 
     public void ValidateFields(LocalizationSearchDTO dto) 
     {

@@ -6,7 +6,11 @@ using MediatR;
 
 namespace Localization.Application.UseCases.Localization.Get;
 
-public class Handler : IRequestHandler<LocalizationSearchDTO, ResponseDTO<IEnumerable<LocalizationResponseDTO>>>
+public class Handler : 
+    IRequestHandler<LocalizationSearchDTO, ResponseDTO<IEnumerable<LocalizationResponseDTO>>>
+    , IRequestHandler<LocalizationSearchByStateDTO, ResponseDTO<IEnumerable<LocalizationResponseDTO>>>
+    , IRequestHandler<LocalizationSearchByIBGECodeDTO, ResponseDTO<LocalizationResponseDTO>>
+    , IRequestHandler<LocalizationSearchByZipCodeDTO, ResponseDTO<IEnumerable<LocalizationResponseDTO>>>
 {
     private readonly ILocalizationRepository _localizationRepository;
 
@@ -22,6 +26,36 @@ public class Handler : IRequestHandler<LocalizationSearchDTO, ResponseDTO<IEnume
         if(validation is not null && validation.Any()) 
             foreach(var error in validation) Console.WriteLine(error);
 
+        var expressions = this.GetExpressions(request);
+
+        var localizations = await this._localizationRepository.GetAndFilterBy(expressions);
+
+        return new ResponseDTO<IEnumerable<LocalizationResponseDTO>>(localizations.Select(x => new LocalizationResponseDTO(x.AddedBy, x.CreatedAt, x.UpdatedBy, x.UpdatedAt, x.IBGECode.Code, x.State.Acronym, x.ZipCode.Code)));
+    }
+
+    public async Task<ResponseDTO<IEnumerable<LocalizationResponseDTO>>> Handle(LocalizationSearchByStateDTO request, CancellationToken cancellationToken)
+    {
+        var localizations = await this._localizationRepository.GetByState(request.State);
+
+        return new ResponseDTO<IEnumerable<LocalizationResponseDTO>>(localizations.Select(x => new LocalizationResponseDTO(x.AddedBy, x.CreatedAt, x.UpdatedBy, x.UpdatedAt, x.IBGECode.Code, x.State.Acronym, x.ZipCode.Code)));
+    }
+
+    public async Task<ResponseDTO<LocalizationResponseDTO>> Handle(LocalizationSearchByIBGECodeDTO request, CancellationToken cancellationToken)
+    {
+        var localization = await this._localizationRepository.GetByIBGECode(request.IBGECode);
+
+        return new ResponseDTO<LocalizationResponseDTO>(new LocalizationResponseDTO(localization.AddedBy, localization.CreatedAt, localization.UpdatedBy, localization.UpdatedAt, localization.IBGECode.Code, localization.State.Acronym, localization.ZipCode.Code));
+    }
+
+    public async Task<ResponseDTO<IEnumerable<LocalizationResponseDTO>>> Handle(LocalizationSearchByZipCodeDTO request, CancellationToken cancellationToken)
+    {
+         var localizations = await this._localizationRepository.GetByZipCode(request.ZipCode);
+
+        return new ResponseDTO<IEnumerable<LocalizationResponseDTO>>(localizations.Select(x => new LocalizationResponseDTO(x.AddedBy, x.CreatedAt, x.UpdatedBy, x.UpdatedAt, x.IBGECode.Code, x.State.Acronym, x.ZipCode.Code)));
+    }
+
+    private List<Expression<Func<Domain.Entities.Localization, bool>>> GetExpressions(LocalizationSearchDTO request)
+    {
         List<Expression<Func<Domain.Entities.Localization, bool>>> expressions = new();
 
         if(!string.IsNullOrEmpty(request.State))
@@ -33,8 +67,6 @@ public class Handler : IRequestHandler<LocalizationSearchDTO, ResponseDTO<IEnume
         if(!string.IsNullOrEmpty(request.ZipCode))
             expressions.Add(l => l.ZipCode.Code == request.ZipCode);
 
-        var localizations = await this._localizationRepository.GetAndFilterBy(expressions);
-
-        return await Task.Run(() => new ResponseDTO<IEnumerable<LocalizationResponseDTO>>(localizations.Select(x => new LocalizationResponseDTO(x.AddedBy, x.CreatedAt, x.UpdatedBy, x.UpdatedAt, x.IBGECode.Code, x.State.Acronym, x.ZipCode.Code))));
+        return expressions;
     }
 }

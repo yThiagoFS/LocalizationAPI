@@ -1,3 +1,5 @@
+using FluentValidation.Results;
+
 namespace Localization.Application.DTOs.Localization;
 
 public class LocalizationBaseDTO 
@@ -9,5 +11,4 @@ public class LocalizationBaseDTO
     public string IBGECode { get; set; } = string.Empty;
 
     public string ZipCode { get; set; } = string.Empty;
-
 }
