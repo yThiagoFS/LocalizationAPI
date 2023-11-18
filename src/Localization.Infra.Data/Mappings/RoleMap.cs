@@ -13,7 +13,11 @@ public class RoleMap : IEntityTypeConfiguration<Role>
         builder.Property(e => e.Name)
         .HasConversion(
             e => e.Value,
-            v => new Domain.ValueObjects.Name(v));
+            v => new Domain.ValueObjects.Name(v))
+            .IsRequired()
+            .HasColumnName("Name")
+            .HasMaxLength(60)
+            .HasColumnType("VARCHAR");
 
         builder
             .HasIndex(e => e.Name)
@@ -23,13 +27,5 @@ public class RoleMap : IEntityTypeConfiguration<Role>
             .Property(r => r.Id)
             .IsRequired()
             .ValueGeneratedNever();
-
-        builder 
-            .OwnsOne(r => r.Name)
-                .Property(n => n.Value)
-                .IsRequired()
-                .HasColumnName("Name")
-                .HasMaxLength(60)
-                .HasColumnType("VARCHAR");
     }
 }

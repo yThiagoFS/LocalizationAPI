@@ -10,7 +10,7 @@ public static class EndpointsExtensions
     {
         builder.MapGet("/", () => Results.Ok("Hello World"));
 
-        builder.MapGet("/localization", async ([FromServices] IMediator mediator, [FromBody] LocalizationSearchDTO request)   => 
+        builder.MapGet("/localization", async ([FromServices] IMediator mediator, [FromBody] LocalizationSearchDTO request) => 
         {
             var response = await mediator.Send(request);
 
@@ -21,7 +21,6 @@ public static class EndpointsExtensions
         {
             Summary = "Get localizations",
             Description = "Get localizations using one or more query options.",
-        })
-        .Accepts<LocalizationSearchDTO>("application/json");
+        });
     }
 }

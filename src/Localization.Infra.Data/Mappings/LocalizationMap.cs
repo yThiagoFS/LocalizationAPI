@@ -44,8 +44,10 @@ public class LocalizationMap : IEntityTypeConfiguration<Domain.Entities.Localiza
             .HasColumnType("DATETIME");
 
         builder
-            .Property(l => l.AddedBy)
+            .OwnsOne(l => l.AddedBy)
+            .Property(l => l.Value)
             .IsRequired()
+            .HasColumnName("AddedBy")
             .HasMaxLength(60)
             .HasColumnType("VARCHAR");
 

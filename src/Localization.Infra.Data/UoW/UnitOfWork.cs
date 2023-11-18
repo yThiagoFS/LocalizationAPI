@@ -6,6 +6,7 @@ namespace Localization.Infra.Data.UoW;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly AppDbContext _context;
+    
     private bool _disposed = false;
 
     public UnitOfWork(AppDbContext context) 
